@@ -1,4 +1,4 @@
-# single-live-stream
+# ASK Single Live Stream
 Template for streaming a single Live Stream, for example a Radio Station
 
 
@@ -7,7 +7,7 @@ Template for streaming a single Live Stream, for example a Radio Station
     *  Add Skill ID as 'appID'
         ``` javascript
         // App-ID. TODO: set to your own Skill App ID from the developer portal.
-         appId : '',
+         appId : '<Skill ID>',
          ```
     * Define a DynamoDB Table name
         ``` javascript
@@ -21,7 +21,7 @@ Template for streaming a single Live Stream, for example a Radio Station
         // Station Name - Displayed on card in Alexa App
         'title' : '<Radio Station Name>',
         // URL to Live Stream - Should be HTTPS, if not, reach out to your BD/SA contact for assistance 
-        'url' : '<https://radio.stream.url',
+        'url' : '<https://radio.stream.url>',
         // URL to Station Logo - Should be HTTPS, S3 works great
-        'image' : 'https://s3.amazonaws.com/radiostation/logo.png'
+        'image' : '<https://s3.amazonaws.com/radiostation/logo.png>'
         ```
