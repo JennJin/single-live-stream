@@ -2,9 +2,12 @@
 
 var audioData = [
     {
-        'title' : 'KISS 92.5 - Toronto',
-        'url' : 'http://tor925.akacast.akamaistream.net/7/288/80873/v1/rogers.akacast.akamaistream.net/tor925',
-        'image' : 'https://s3.amazonaws.com/audioplayer-samples/Kiss925_Logo_514x514.png'
+        // Station Name - Displayed on card in Alexa App
+        'title' : '<Radio Station Name>',
+        // URL to Live Stream - Should be HTTPS, if not, reach out to your BD/SA contact for assistance 
+        'url' : '<https://radio.stream.url',
+        // URL to Station Logo - Should be HTTPS, S3 works great
+        'image' : 'https://s3.amazonaws.com/radiostation/logo.png'
     }
 ];
 

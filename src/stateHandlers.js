@@ -34,7 +34,7 @@ var stateHandlers = {
             controller.play.call(this);
         },
         'AMAZON.HelpIntent' : function () {
-            var message = 'Welcome to the AWS Podcast. You can say, play the audio, to begin the podcast.';
+            var message = 'Sample of a live radio station playback.';
             this.response.speak(message).listen(message);
             this.emit(':responseReady');
         },
@@ -52,7 +52,7 @@ var stateHandlers = {
             // No session ended logic
         },
         'Unhandled' : function () {
-            var message = 'Sorry, I could not understand. Please say, play the audio, to begin the audio.';
+            var message = 'Sorry, I could not understand.';
             this.response.speak(message).listen(message);
             this.emit(':responseReady');
         }
@@ -64,12 +64,10 @@ var stateHandlers = {
          */
         'LaunchRequest' : function () {
             console.log('LaunchRequest - playModeIntentHandlers');
-           
             this.emit('PlayRadio');
         },
         'PlayRadio' : function () {
             console.log('PlayRadio - playModeIntentHandler');
-            
             controller.play.call(this);
         },
         'AMAZON.NextIntent' : function () { controller.playNext.call(this) },
@@ -84,9 +82,7 @@ var stateHandlers = {
         'AMAZON.ShuffleOffIntent' : function () { controller.shuffleOff.call(this) },
         'AMAZON.StartOverIntent' : function () { controller.startOver.call(this) },
         'AMAZON.HelpIntent' : function () {
-            // This will called while audio is playing and a user says "ask <invocation_name> for help"
-            var message = 'You are listening to the AWS Podcast. You can say, Next or Previous to navigate through the playlist. ' +
-                'At any time, you can say Pause to pause the audio and Resume to resume.';
+            var message = 'Sample of a live radio station playback.';
             this.response.speak(message).listen(message);
             this.emit(':responseReady');
         },
@@ -94,7 +90,7 @@ var stateHandlers = {
             // No session ended logic
         },
         'Unhandled' : function () {
-            var message = 'Sorry, I could not understand. You can say, Next or Previous to navigate through the playlist.';
+            var message = 'Sorry, I could not understand.';
             this.response.speak(message).listen(message);
             this.emit(':responseReady');
         }
@@ -127,13 +123,13 @@ var controller = function () {
              */
             this.handler.state = constants.states.PLAY_MODE;
 
-            if (this.attributes['playbackFinished']) {
+            //if (this.attributes['playbackFinished']) {
                 // Reset to top of the playlist when reached end.
                 this.attributes['index'] = 0;
                 this.attributes['offsetInMilliseconds'] = 0;
                 this.attributes['playbackIndexChanged'] = true;
                 this.attributes['playbackFinished'] = false;
-            }
+            //}
 
             var token = String(this.attributes['playOrder'][this.attributes['index']]);
             var playBehavior = 'REPLACE_ALL';
@@ -142,16 +138,15 @@ var controller = function () {
             // Since play behavior is REPLACE_ALL, enqueuedToken attribute need to be set to null.
             this.attributes['enqueuedToken'] = null;
 
-            //if (canThrowCard.call(this)) {
+            if (this.event.request.type.substring(0,11) === 'AudioPlayer') {
                 var cardTitle = 'Playing ' + podcast.title;
                 var cardContent = 'Playing ' + podcast.title;
                 var cardImage = {
-                        "smallImageUrl": "https://s3.amazonaws.com/audioplayer-samples/Kiss925_Logo_514x514.png",
-                        "largeImageUrl": "https://s3.amazonaws.com/audioplayer-samples/Kiss925_Logo_514x514.png"
+                        "smallImageUrl": podcast.image,
+                        "largeImageUrl": podcast.image
                     };
                 this.response.cardRenderer(cardTitle, cardContent, cardImage);
-            //}
-
+            }
             
             this.response.audioPlayerPlay(playBehavior, podcast.url, token, null, offsetInMilliseconds);
             this.emit(':responseReady');
@@ -166,61 +161,22 @@ var controller = function () {
             this.emit(':responseReady');
         },
         playNext: function () {
-            /*
-             *  Called when AMAZON.NextIntent or PlaybackController.NextCommandIssued is invoked.
-             *  Index is computed using token stored when AudioPlayer.PlaybackStopped command is received.
-             *  If reached at the end of the playlist, choose behavior based on "loop" flag.
-             */
-            var index = this.attributes['index'];
-            index += 1;
-            // Check for last audio file.
-            if (index === audioData.length) {
-                if (this.attributes['loop']) {
-                    index = 0;
-                } else {
-                    // Reached at the end. Thus reset state to start mode and stop playing.
-                    this.handler.state = constants.states.START_MODE;
-
-                    var message = 'You have reached at the end of the playlist.';
-                    this.response.speak(message).audioPlayerStop();
+                if (this.event.request.type === 'IntentRequest') {
+                    var message = "Sorry, that function is not available.";
+                    
+                    this.response.speak(message);
                     return this.emit(':responseReady');
                 }
-            }
-            // Set values to attributes.
-            this.attributes['index'] = index;
-            this.attributes['offsetInMilliseconds'] = 0;
-            this.attributes['playbackIndexChanged'] = true;
 
-            controller.play.call(this);
         },
         playPrevious: function () {
-            /*
-             *  Called when AMAZON.PreviousIntent or PlaybackController.PreviousCommandIssued is invoked.
-             *  Index is computed using token stored when AudioPlayer.PlaybackStopped command is received.
-             *  If reached at the end of the playlist, choose behavior based on "loop" flag.
-             */
-            var index = this.attributes['index'];
-            index -= 1;
-            // Check for last audio file.
-            if (index === -1) {
-                if (this.attributes['loop']) {
-                    index = audioData.length - 1;
-                } else {
-                    // Reached at the end. Thus reset state to start mode and stop playing.
-                    this.handler.state = constants.states.START_MODE;
-
-                    var message = 'You have reached at the start of the playlist.';
-                    this.response.speak(message).audioPlayerStop();
+            if (this.event.request.type === 'IntentRequest') {
+                    var message = 'Sorry, that function is not available.';
+                    
+                    this.response.speak(message);
                     return this.emit(':responseReady');
-                }
             }
-            // Set values to attributes.
-            this.attributes['index'] = index;
-            this.attributes['offsetInMilliseconds'] = 0;
-            this.attributes['playbackIndexChanged'] = true;
-
-            controller.play.call(this);
-        },
+        },       
         loopOn: function () {
             // Turn on loop play.
             this.attributes['loop'] = true;
