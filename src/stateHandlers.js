@@ -148,6 +148,19 @@ var controller = function () {
                 this.response.cardRenderer(cardTitle, cardContent, cardImage);
             }
             
+            if (this.event.request.type === 'LaunchRequest' || this.event.request.type === 'IntentRequest') {
+                var cardTitle = 'Playing ' + podcast.title;
+                var cardContent = 'Playing ' + podcast.title;
+                var cardImage = {
+                        "smallImageUrl": podcast.image,
+                        "largeImageUrl": podcast.image
+                    };
+                this.response.cardRenderer(cardTitle, cardContent, cardImage);
+                
+                var message = "Playing "+podcast.title;    
+                this.response.speak(message);
+            }
+            
             this.response.audioPlayerPlay(playBehavior, podcast.url, token, null, offsetInMilliseconds);
             this.emit(':responseReady');
         },
