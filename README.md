@@ -77,3 +77,8 @@ ASK CLI **will create the skill and the lambda function for you**. The Lambda fu
 ## Testing
 
 1. To test, you need to login to Alexa Developer Console, and **enable the "Test" switch on your skill from the "Test" Tab**.
+2. Once the "Test" switch is enabled, your skill can be tested on devices associated with the developer account as well. Speak to Alexa from any enabled device, from your browser at [echosim.io](https://echosim.io/welcome), or through your Amazon Mobile App and say:
+
+	```text
+	Alexa, open radio test
+	```
