@@ -1,0 +1,42 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "summary": "This is an example skill to play a single live stream, like a Radio Station",
+          "examplePhrases": [
+            "Alexa, open color changer",
+            "Alexa, launch color changer"
+          ],
+          "name": "radio test",
+          "description": "This is an example skill to play a single live stream, like a Radio Station"
+        }
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "Just launch the skill",
+      "category": "GAMES",
+      "distributionCountries": []
+    },
+    "apis": {
+      "custom": {
+         "endpoint": {
+          "sourceDir": "lambda/custom"
+        },
+        "interfaces": [
+          {
+            "type": "AUDIO_PLAYER"
+          }
+        ]
+      }
+    },
+    "manifestVersion": "1.0",
+    "permissions": [],
+    "privacyAndCompliance": {
+      "allowsPurchases": false,
+      "usesPersonalInfo": false,
+      "isChildDirected": false,
+      "isExportCompliant": true,
+      "containsAds": false
+    }
+  }
+}
