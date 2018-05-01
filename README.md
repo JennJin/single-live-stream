@@ -4,7 +4,7 @@
 Template for streaming a single Live Stream, for example a Radio Station
 
 
-# Setup Steps - Edit the following files and fill in your info
+## Setup Steps - Edit the following files and fill in your info
 * Edit src/constants.js
     *  Add Skill ID as 'appID'
         ``` javascript
@@ -27,9 +27,41 @@ Template for streaming a single Live Stream, for example a Radio Station
         // URL to Station Logo - Should be HTTPS, S3 works great
         'image' : '<https://s3.amazonaws.com/radiostation/logo.png>'
         ```
-        
-        
-# Deployment
+	
+## About
+**Note:** The rest of this readme assumes you have your developer environment ready to go and that you have some familiarity with CLI (Command Line Interface) Tools, [AWS](https://aws.amazon.com/), and the [ASK Developer Portal](https://developer.amazon.com/alexa-skills-kit). If not, [click here](./instructions/0-intro.md) for a more detailed walkthrough.
+
+## Setup w/ ASK CLI
+
+### Pre-requisites
+
+* Node.js (> v4.3)
+* Register for an [AWS Account](https://aws.amazon.com/)
+* Register for an [Amazon Developer Account](https://developer.amazon.com/)
+* Install and Setup [ASK CLI](https://developer.amazon.com/docs/smapi/quick-start-alexa-skills-kit-command-line-interface.html)
+
+### Installation
+1. Clone the repository into a folder named stream-test.
+
+	```bash
+	$ git clone https://github.com/JennJin/single-live-stream stream-test
+	```
+
+2. Initiatialize the [ASK CLI](https://developer.amazon.com/docs/smapi/quick-start-alexa-skills-kit-command-line-interface.html) by Navigating into the repository and running npm command: `ask init`. Follow the prompts.
+
+	```bash
+	$ cd stream-test
+	$ ask init
+	```
+
+3. Install npm dependencies by navigating into the `/lambda/custom` directory and running the npm command: `npm install`
+
+	```bash
+	$ cd lambda/custom
+	$ npm install
+	```
+
+## Deployment
 
 ASK CLI **will create the skill and the lambda function for you**. The Lambda function will be created in ```us-east-1 (Northern Virginia)``` by default.
 
@@ -40,6 +72,6 @@ ASK CLI **will create the skill and the lambda function for you**. The Lambda fu
 	$ ask deploy
 	```
     
-# Testing
+## Testing
 
 1. To test, you need to login to Alexa Developer Console, and **enable the "Test" switch on your skill from the "Test" Tab**.
