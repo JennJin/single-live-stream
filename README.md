@@ -27,6 +27,7 @@ Template for streaming a single Live Stream, for example a Radio Station
         // URL to Station Logo - Should be HTTPS, S3 works great
         'image' : '<https://s3.amazonaws.com/radiostation/logo.png>'
         ```
+
 	
 ## About
 **Note:** The rest of this readme assumes you have your developer environment ready to go and that you have some familiarity with CLI (Command Line Interface) Tools, [AWS](https://aws.amazon.com/), and the [ASK Developer Portal](https://developer.amazon.com/alexa-skills-kit). If not, [click here](./instructions/0-intro.md) for a more detailed walkthrough.
@@ -60,7 +61,8 @@ Template for streaming a single Live Stream, for example a Radio Station
 	$ cd lambda/custom
 	$ npm install
 	```
-
+        
+        
 ## Deployment
 
 ASK CLI **will create the skill and the lambda function for you**. The Lambda function will be created in ```us-east-1 (Northern Virginia)``` by default.
