@@ -4,7 +4,7 @@
 Template for streaming a single Live Stream, for example a Radio Station
 
 
-# Setup Steps - Edit the following files and fill in your info
+## Setup Steps - Edit the following files and fill in your info
 * Edit src/constants.js
     *  Add Skill ID as 'appID'
         ``` javascript
@@ -29,7 +29,7 @@ Template for streaming a single Live Stream, for example a Radio Station
         ```
         
         
-# Deployment
+## Deployment
 
 ASK CLI **will create the skill and the lambda function for you**. The Lambda function will be created in ```us-east-1 (Northern Virginia)``` by default.
 
@@ -40,6 +40,6 @@ ASK CLI **will create the skill and the lambda function for you**. The Lambda fu
 	$ ask deploy
 	```
     
-# Testing
+## Testing
 
 1. To test, you need to login to Alexa Developer Console, and **enable the "Test" switch on your skill from the "Test" Tab**.
